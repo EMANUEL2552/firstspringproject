@@ -1,39 +1,52 @@
-package com.devsuperior.myfirstproject;
+package entities.repositories;
 
-import com.devsuperior.myfirstproject.repositories.CategoryRepository;
-import com.devsuperior.myfirstproject.repositories.ProductRepository;
 import entities.Category;
 import entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
+
+
 @SpringBootApplication
+@Qualifier("CategoryRepository")
+@EnableJpaRepositories(basePackages = {"entities.repositories.CategoryRepository"})
 public class MyfirstprojectApplication implements CommandLineRunner {
 
-	@Autowired
-	private CategoryRepository categoryRepository;
 
 	@Autowired
 	private ProductRepository productRepository;
 
+
+	@Autowired
+	private CategoryRepository categoryRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(MyfirstprojectApplication.class, args);
 	}
 
+
 	@Override
 	public void run(String... args) throws Exception {
 
-		Category cat1 = new Category(1L, "Electronics");
-		Category cat2 = new Category(2L, "Books");
 
-		Product p1 = new Product(1L, "TV", 2200.00, cat1);
-		Product p2 = new Product(2L, "Domain Driven Design", 120.00, cat2);
-		Product p3 = new Product(3L, "PS5", 2800.00, cat1);
-		Product p4 = new Product(4L, "Docker", 100.00, cat2);
+
+
+
+
+
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+
+		Product p1 = new Product(null, "TV", 2200.00, cat1);
+		Product p2 = new Product(null, "Domain Driven Design", 120.00, cat2);
+		Product p3 = new Product(null, "PS5", 2800.00, cat1);
+		Product p4 = new Product(null, "Docker", 100.00, cat2);
 
 		cat1.getProducts().addAll(Arrays.asList(p1, p3));
 		cat2.getProducts().addAll(Arrays.asList(p2, p4));

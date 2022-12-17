@@ -1,10 +1,8 @@
-package com.devsuperior.myfirstproject.resources;
+package entities.resources;
 
 
-import com.devsuperior.myfirstproject.repositories.CategoryRepository;
-import com.devsuperior.myfirstproject.repositories.ProductRepository;
+import entities.repositories.CategoryRepository;
 import entities.Category;
-import entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,23 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/products")
-    public class ProductResource {
+@RequestMapping(value = "/categories")
+    public class CategoryResource {
 
     @Autowired
-    private ProductRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
-	   List<Product> list = categoryRepository.findAll();
+    public ResponseEntity<List<Category>> findAll() {
+	   List<Category> list = categoryRepository.findAll();
 
        return ResponseEntity.ok().body(list);
     }
 
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Product> findById(@PathVariable Long id) {
-     Product cat = categoryRepository.findById(id);
+    public ResponseEntity<Category> findById(@PathVariable Long id) {
+     Category cat = categoryRepository.findById(id).get();
        return ResponseEntity.ok().body(cat);
     }
 
